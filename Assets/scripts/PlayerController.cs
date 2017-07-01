@@ -49,7 +49,6 @@ public class PlayerController : MonoBehaviour {
 		transform.rotation = Quaternion.Slerp(transform.rotation, rot, turnRate * Time.deltaTime);
 
 		Debug.Log ("Speed: " + speed);
-
 	}
 
 
