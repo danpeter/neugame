@@ -34,9 +34,13 @@ public class PlayerController : MonoBehaviour {
 		if (moveVertical != 0) {
 			Accelerate ();
 		}
+		float moveHorizontal = Input.GetAxis ("Horizontal");
+		if (moveHorizontal != 0) {
+			Turn (moveHorizontal);
+		}
 
 		Vector3 mousePositionScreen = Input.mousePosition;
-		mousePositionScreen.z = 20;
+		//mousePositionScreen.z = 20;
 		Vector3 mousePosition = Camera.main.ScreenToWorldPoint(mousePositionScreen);
 		//Debug.Log ("Mouse: " + mousePosition);
 
@@ -48,7 +52,9 @@ public class PlayerController : MonoBehaviour {
 		Quaternion rot = Quaternion.LookRotation(dir);
 		transform.rotation = Quaternion.Slerp(transform.rotation, rot, turnRate * Time.deltaTime);
 
-		Debug.Log ("Speed: " + speed);
+		//Debug.Log ("Speed: " + speed);
+
+		//rb.position += transform.forward * Time.deltaTime * speed;
 	}
 
 
@@ -64,9 +70,36 @@ public class PlayerController : MonoBehaviour {
 
 	void Accelerate() {
 		speed += acceleration * Time.deltaTime;
-		speed = Mathf.Clamp (speed, 1, maxSpeed);
+		speed = Mathf.Clamp (speed, 0, maxSpeed);
 		//transform.Translate (speed * Time.deltaTime, 0, 0, Space.World);
-		transform.position += transform.forward * Time.deltaTime * speed;
+
+		rb.AddForce (transform.forward * 10);
+		rb.velocity = new Vector3
+			(
+				Mathf.Clamp(rb.velocity.x, - maxSpeed, maxSpeed),
+				0.0f,
+				Mathf.Clamp(rb.velocity.z, - maxSpeed, maxSpeed)
+		);
+	}
+
+	void Turn(float moveHorizontal) {
+		if (moveHorizontal > 0) {
+			rb.AddForce (transform.right * 10);
+		} else {
+			rb.AddForce (transform.right *-1 * 10);
+		}
+
+		rb.velocity = new Vector3
+		(
+			Mathf.Clamp(rb.velocity.x, - maxSpeed, maxSpeed),
+			0.0f,
+			Mathf.Clamp(rb.velocity.z, - maxSpeed, maxSpeed)
+		);
+	}
+
+	void Deaccelerate() {
+		speed -= acceleration * Time.deltaTime;
+		speed = Mathf.Clamp (speed, 0, maxSpeed);
 	}
 
 

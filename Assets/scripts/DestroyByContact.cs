@@ -21,17 +21,20 @@ public class DestroyByContact : MonoBehaviour {
 	 
 	void OnTriggerEnter(Collider other) 
 	{
-		Debug.Log (other.name);
 		if (other.tag == "Boundary") {
 			return;
 		}
+		if (other.tag == "EnemyBolt" && this.tag != "Player") {
+			return;
+		}
+
 		Instantiate(explosion, transform.position, transform.rotation);
 		if (other.tag == "Player") {
 			Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
 			gameController.GameOver ();
 		}
 
-		gameController.addScore (scoreValue); 
+		gameController.AddScore (scoreValue); 
 		Destroy(other.gameObject);
 		Destroy(gameObject);
 	

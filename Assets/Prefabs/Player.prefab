@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 64783529016586544}
   - component: {fileID: 114091247962754646}
   - component: {fileID: 82183865818932776}
+  - component: {fileID: 114099931950194948}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -326,6 +327,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  maxSpeed: 0
+  acceleration: 0
+  turnRate: 0
   tilt: 4
   shot: {fileID: 1680816298783850, guid: 5afff20576837624bb350f9a1956706b, type: 2}
   shotSpawn: {fileID: 4706394897926926}
@@ -335,6 +339,20 @@ MonoBehaviour:
     xMax: 6.9
     zMax: 8
     zMin: -4
+--- !u!114 &114099931950194948
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1484458670187812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd60fffb4dbd0ff408dfbf18d5c363d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 2}
+  playerExplosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 2}
+  scoreValue: 0
 --- !u!198 &198513965956483908
 ParticleSystem:
   m_ObjectHideFlags: 1
