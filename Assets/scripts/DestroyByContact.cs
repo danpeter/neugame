@@ -24,21 +24,27 @@ public class DestroyByContact : MonoBehaviour {
 		if (other.tag == "Boundary") {
 			return;
 		}
-		if (other.tag == "EnemyBolt" && this.tag != "Player") {
+		if (other.tag == "PlayerWeapon" && this.tag == "Player") {
+			return;
+		}
+		if (other.tag == "EnemyWeapon" && this.tag == "Enemy") {
+			return;
+		}
+		if (other.tag == "Enemy" && this.tag == "Player") {
+			return;
+		}
+		if (other.tag == "Player" && this.tag == "Enemy") {
 			return;
 		}
 
 		Instantiate(explosion, transform.position, transform.rotation);
-		if (other.tag == "Player") {
-			Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
+
+		if (this.tag == "Player") {
 			gameController.GameOver ();
 		}
 
 		gameController.AddScore (scoreValue); 
 		Destroy(other.gameObject);
 		Destroy(gameObject);
-	
 	}
-
-
 }

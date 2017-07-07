@@ -30,7 +30,9 @@ public class NewPlayerController : MonoBehaviour {
 		float moveVertical = Input.GetAxis ("Vertical");
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 
-		TurnToMouse ();
+		if (!Input.GetKey (KeyCode.LeftAlt)) {
+			TurnToMouse ();
+		}
 
 		if (moveVertical != 0) {
 			Accelerate (moveVertical);
@@ -45,12 +47,6 @@ public class NewPlayerController : MonoBehaviour {
 		}
 
 		ClampVelocity ();
-
-		//TurnToMouse ();
-
-		//Debug.Log ("Speed: " + speed);
-
-		//rb.position += transform.forward * Time.deltaTime * speed;
 	}
 
 	void TurnToMouse ()
@@ -58,15 +54,11 @@ public class NewPlayerController : MonoBehaviour {
 		Vector3 mousePositionScreen = Input.mousePosition;
 		mousePositionScreen.z = 10; // Needed for perspective camera?
 		Vector3 mousePosition = Camera.main.ScreenToWorldPoint (mousePositionScreen);
-		//Debug.Log ("Mouse: " + mousePosition);
 		Vector3 shipposition = transform.position;
-		//Debug.Log ("Ship: " + shipposition);
 		Vector3 dir = mousePosition - transform.position;
 		dir.y = 0;
 		Quaternion rot = Quaternion.LookRotation (dir);
 		transform.rotation = Quaternion.Slerp (transform.rotation, rot, turnRate * Time.deltaTime);
-		//transform.rotation = Quaternion.RotateTowards (transform.rotation, rot, turnRate * Time.deltaTime);
-		//transform.rotation = rot;
 	}
 
 	void Update () {
@@ -77,26 +69,28 @@ public class NewPlayerController : MonoBehaviour {
 		}
 
 		if (Input.GetButton ("Fire2") && Time.time > nextFireMissiles) {
-			nextFireMissiles = Time.time + fireRateMissiles;
-			Instantiate (missile, shotSpawn.position, shotSpawn.rotation);
-			//audioSource.Play ();
+			RaycastHit hitInfo = new RaycastHit ();
+			bool hit = Physics.Raycast (Camera.main.ScreenPointToRay (Input.mousePosition), out hitInfo);
+			if (hit && hitInfo.transform.gameObject.tag == "Enemy") {
+				Debug.Log ("Hit " + hitInfo.transform.gameObject.name);
+				nextFireMissiles = Time.time + fireRateMissiles;
+				GameObject obj = (GameObject) Instantiate (missile, shotSpawn.position, shotSpawn.rotation);
+				obj.GetComponent<TargetingMissile> ().SetTarget (hitInfo.transform);
+				//audioSource.Play ();
+			} else {
+				Debug.Log ("Miss...");
+			}
 		}
 	}
 
 	void Accelerate(float moveVertical)
 	{
 		rb.AddForce (transform.forward * thrust * Mathf.Sign(moveVertical));
-		//rb.position += transform.forward * Time.deltaTime * thrust;
 	}
 
 	void Turn(float moveHorizontal)
 	{
-		//if (Input.GetKey (KeyCode.LeftShift)) {
-			//TurnToMouse ();
-			rb.AddForce (transform.right * sideThrust * Mathf.Sign (moveHorizontal));
-		//} else {
-		//	rb.transform.Rotate (Vector3.up * turnRate * Time.deltaTime * Mathf.Sign (moveHorizontal));
-		//}
+		rb.AddForce (transform.right * sideThrust * Mathf.Sign (moveHorizontal));
 	}
 
 	void ClampVelocity ()

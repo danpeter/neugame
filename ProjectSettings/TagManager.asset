@@ -4,7 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - EnemyBolt
+  - EnemyWeapon
+  - PlayerWeapon
+  - Enemy
   layers:
   - Default
   - TransparentFX

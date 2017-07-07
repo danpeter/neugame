@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour {
 	public Transform shotSpawn;
 
 	private Rigidbody rb;
-	private Transform target;
+	protected Transform target;
 
 	// Use this for initialization
 	void Start () {
@@ -63,11 +63,10 @@ public class EnemyController : MonoBehaviour {
 		rb.velocity = new Vector3 (Mathf.Clamp (rb.velocity.x, -maxVelocity, maxVelocity), 0.0f, Mathf.Clamp (rb.velocity.z, -maxVelocity, maxVelocity));
 	}
 
-	void Fire()
+	protected void Fire()
 	{
 		if (target != null) {
 			float distance = Vector3.Distance (transform.position, target.position);
-			Debug.Log ("Distance: " + distance);
 			if (distance < attackDistance) {
 				Instantiate (shot, shotSpawn.position, shotSpawn.rotation);
 				GetComponent<AudioSource> ().Play ();
