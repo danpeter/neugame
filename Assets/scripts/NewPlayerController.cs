@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NewPlayerController : MonoBehaviour {
 	private Rigidbody rb;
+
+	public int health;
 	public float thrust;
 	public float sideThrust;
 	public float maxVelocity;
@@ -12,17 +15,20 @@ public class NewPlayerController : MonoBehaviour {
 	public float tilt;
 	public GameObject shot;
 	public GameObject missile;
+	public GameObject explosion;
 	public Transform shotSpawn;
 	public float fireRate;
 	private float nextFire;
 	public float fireRateMissiles;
 	private float nextFireMissiles;
 	private AudioSource audioSource;
+	private GameController gameController;
 
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody>();
 		audioSource = GetComponent<AudioSource> ();
+		gameController = GameObject.FindWithTag ("GameController").GetComponent<GameController> ();
 	}
 
 	void FixedUpdate () {
@@ -72,15 +78,17 @@ public class NewPlayerController : MonoBehaviour {
 			RaycastHit hitInfo = new RaycastHit ();
 			bool hit = Physics.Raycast (Camera.main.ScreenPointToRay (Input.mousePosition), out hitInfo);
 			if (hit && hitInfo.transform.gameObject.tag == "Enemy") {
-				Debug.Log ("Hit " + hitInfo.transform.gameObject.name);
+				//Debug.Log ("Hit " + hitInfo.transform.gameObject.name);
 				nextFireMissiles = Time.time + fireRateMissiles;
 				GameObject obj = (GameObject) Instantiate (missile, shotSpawn.position, shotSpawn.rotation);
 				obj.GetComponent<TargetingMissile> ().SetTarget (hitInfo.transform);
 				//audioSource.Play ();
 			} else {
-				Debug.Log ("Miss...");
+				//Debug.Log ("Miss...");
 			}
 		}
+
+		UpdateHealthText ();
 	}
 
 	void Accelerate(float moveVertical)
@@ -96,5 +104,26 @@ public class NewPlayerController : MonoBehaviour {
 	void ClampVelocity ()
 	{
 		rb.velocity = new Vector3 (Mathf.Clamp (rb.velocity.x, -maxVelocity, maxVelocity), 0.0f, Mathf.Clamp (rb.velocity.z, -maxVelocity, maxVelocity));
+	}
+
+	void OnTriggerEnter (Collider other)
+	{
+		if (other.tag == "EnemyWeapon") {
+			Weapon weapon = other.gameObject.GetComponent<Weapon> ();
+			health -= weapon.damage;
+			if (weapon.explosion != null) {
+				Instantiate (weapon.explosion, other.gameObject.transform.position, other.gameObject.transform.rotation);
+			}
+			Destroy (other.gameObject);
+		}
+
+		if (health <= 0) {
+			Instantiate(explosion, transform.position, transform.rotation);
+			gameController.GameOver ();
+			Destroy (gameObject);
+		}
+	}
+	void UpdateHealthText() {
+		gameController.healthText.text = "Health: " + health;
 	}
 }

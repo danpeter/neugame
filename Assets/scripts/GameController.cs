@@ -12,9 +12,8 @@ public class GameController : MonoBehaviour {
 	public float spawnWait;
 	public float startWait;
 	public float waveWait;
-	public Text scoreText;
-	private int score;
 
+	public Text healthText;
 	public Text restartText;
 	public Text gameOverText;
 
@@ -26,8 +25,6 @@ public class GameController : MonoBehaviour {
 		restart = false;
 		restartText.text = "";
 		gameOverText.text = "";
-		score = 0;
-		UpdateScore ();
 		StartCoroutine (SpawnWaves ());
 	}
 
@@ -50,10 +47,8 @@ public class GameController : MonoBehaviour {
 					break;
 				}
 				Vector3 spawnPosition = player.transform.position;
-				Debug.Log (spawnPosition.ToString ());
 				spawnPosition.x += (Random.Range (10, 20) * (Random.value < 0.5 ? 1 : -1));
 				spawnPosition.z += (Random.Range (10, 20) * (Random.value < 0.5 ? 1 : -1));
-				Debug.Log (spawnPosition.ToString ());
 				Quaternion spawnRotation = Quaternion.identity;
 				GameObject hazard = hazards[Random.Range(0, hazards.Length)];
 				Instantiate (hazard, spawnPosition, spawnRotation);
@@ -67,17 +62,6 @@ public class GameController : MonoBehaviour {
 				break;
 			}
 		}
-	}
-
-	public void AddScore(int newScoreValue)
-	{
-		score += newScoreValue;
-		UpdateScore ();
-	}
-
-	void UpdateScore()
-	{
-		scoreText.text = "Score: " + score;
 	}
 
 	public void GameOver ()

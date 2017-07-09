@@ -70,7 +70,6 @@ GameObject:
   - component: {fileID: 4117781876169332}
   - component: {fileID: 54086377746833716}
   - component: {fileID: 82183865818932776}
-  - component: {fileID: 114099931950194948}
   - component: {fileID: 114252262615895438}
   - component: {fileID: 135051407214984268}
   m_Layer: 0
@@ -187,7 +186,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1680080521127486}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.75}
+  m_LocalPosition: {x: 0, y: 0, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4695038666987022}
@@ -247,7 +246,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 32
   m_CollisionDetection: 0
 --- !u!82 &82183865818932776
 AudioSource:
@@ -329,20 +328,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114099931950194948
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1484458670187812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd60fffb4dbd0ff408dfbf18d5c363d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 2}
-  playerExplosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 2}
-  scoreValue: 0
 --- !u!114 &114252262615895438
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -354,6 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6908bd2d42fcd4ebbf6967d31594f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
   thrust: 20
   sideThrust: 20
   maxVelocity: 4
@@ -362,9 +348,11 @@ MonoBehaviour:
   tilt: 5
   shot: {fileID: 1680816298783850, guid: 5afff20576837624bb350f9a1956706b, type: 2}
   missile: {fileID: 1680816298783850, guid: 529dff924b9a76e4a9d2fda642d45550, type: 2}
+  explosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 2}
   shotSpawn: {fileID: 4706394897926926}
   fireRate: 0.1
-  fireRateMissiles: 2
+  healthText: {fileID: 0}
+  fireRateMissiles: 1
 --- !u!135 &135051407214984268
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -372,7 +360,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1484458670187812}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5

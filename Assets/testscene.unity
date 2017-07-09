@@ -159,7 +159,7 @@ MonoBehaviour:
   spawnWait: 1
   startWait: 1
   waveWait: 1
-  scoreText: {fileID: 1905105515}
+  healthText: {fileID: 1905105515}
   restartText: {fileID: 1043221692}
   gameOverText: {fileID: 2069743680}
 --- !u!82 &345572277
@@ -638,7 +638,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -588052050
+  randomSeed: -17342195
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3761,33 +3761,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4913383967279456, guid: 946a3bc7a5384d34cbc80cb00a810cf1, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1680080521127486, guid: 946a3bc7a5384d34cbc80cb00a810cf1, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1206635318599698, guid: 946a3bc7a5384d34cbc80cb00a810cf1, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 135051407214984268, guid: 946a3bc7a5384d34cbc80cb00a810cf1,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 114252262615895438, guid: 946a3bc7a5384d34cbc80cb00a810cf1,
         type: 2}
-      propertyPath: fireRateMissiles
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 54086377746833716, guid: 946a3bc7a5384d34cbc80cb00a810cf1,
-        type: 2}
-      propertyPath: m_Constraints
-      value: 32
-      objectReference: {fileID: 0}
+      propertyPath: healthText
+      value: 
+      objectReference: {fileID: 1905105515}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 946a3bc7a5384d34cbc80cb00a810cf1, type: 2}
   m_IsPrefabParent: 0
@@ -3802,7 +3780,7 @@ GameObject:
   - component: {fileID: 1905105516}
   - component: {fileID: 1905105515}
   m_Layer: 5
-  m_Name: Score Text
+  m_Name: Health Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3858,7 +3836,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Score Text
+  m_Text: Health Text
 --- !u!222 &1905105516
 CanvasRenderer:
   m_ObjectHideFlags: 0

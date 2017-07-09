@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
 
+	public int health;
+
 	public float turnRate;
 	public float thrust;
 	public float maxVelocity;
@@ -12,6 +14,7 @@ public class EnemyController : MonoBehaviour {
 	public float delay;
 	public float fireRate;
 
+	public GameObject explosion;
 	public GameObject shot;
 	public Transform shotSpawn;
 
@@ -71,6 +74,23 @@ public class EnemyController : MonoBehaviour {
 				Instantiate (shot, shotSpawn.position, shotSpawn.rotation);
 				GetComponent<AudioSource> ().Play ();
 			}
+		}
+	}
+
+	void OnTriggerEnter (Collider other)
+	{
+		if (other.tag == "PlayerWeapon") {
+			Weapon weapon = other.gameObject.GetComponent<Weapon> ();
+			health -= weapon.damage;
+			if (weapon.explosion != null) {
+				Instantiate (weapon.explosion, other.gameObject.transform.position, other.gameObject.transform.rotation);
+			}
+			Destroy (other.gameObject);
+		}
+
+		if (health <= 0) {
+			Instantiate(explosion, transform.position, transform.rotation);
+			Destroy (gameObject);
 		}
 	}
 }

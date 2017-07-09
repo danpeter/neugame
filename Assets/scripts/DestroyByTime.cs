@@ -5,14 +5,24 @@ using UnityEngine;
 public class DestroyByTime : MonoBehaviour {
 
 	public float lifetime;
+	public GameObject explosion;
 
 	// Use this for initialization
 	void Start () {
-		Destroy (gameObject, lifetime);
+		StartCoroutine ("AutoDestroy");
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	void DestroySelf()
+	{
+		if (explosion != null) {
+			Instantiate (explosion, transform.position, transform.rotation);
+		}
+		Destroy (gameObject);
+	}
+
+	IEnumerator AutoDestroy ()
+	{
+		yield return new WaitForSeconds (lifetime);
+		DestroySelf ();
 	}
 }
