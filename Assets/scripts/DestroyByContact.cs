@@ -21,7 +21,8 @@ public class DestroyByContact : MonoBehaviour {
 	 
 	void OnTriggerEnter(Collider other) 
 	{
-		if (other.tag == "Boundary") {
+		
+	/*	if (other.tag == "Boundary") {
 			return;
 		}
 		if (other.tag == "PlayerWeapon" && this.tag == "Player") {
@@ -43,7 +44,34 @@ public class DestroyByContact : MonoBehaviour {
 			gameController.GameOver ();
 		}
 			
-		Destroy(other.gameObject);
 		Destroy(gameObject);
+		*/
+		Debug.Log (other.name);
+		if (other.tag == "AsteroidGenerator") {
+			return;
+		}
+
+		if (other.tag == "Player") {
+			Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
+			gameController.GameOver ();
+		}
+
+		if (other.tag == "Enemy") {
+			Instantiate(explosion, other.transform.position, other.transform.rotation);
+		}
+
+		if (other.tag == "EnemyWeapon" || other.tag == "PlayerWeapon") {
+			Weapon weapon = other.gameObject.GetComponent<Weapon> ();
+			if (weapon.explosion != null) {
+				Instantiate (weapon.explosion, other.gameObject.transform.position, other.gameObject.transform.rotation);
+			}
+		}
+
+
+
+		Destroy(other.gameObject);
+
+
+
 	}
 }
