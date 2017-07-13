@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AsteroidGenerator : MonoBehaviour {
 
-	public GameObject asteroid;
+	public GameObject[] asteroids;
 	public int asteroidCount;
 	public GameObject player;
 	private SphereCollider myCollider;
@@ -23,7 +23,7 @@ public class AsteroidGenerator : MonoBehaviour {
 			Vector2 spawnPoint2d = Random.insideUnitCircle * colliderRadius;
 			Vector3 spawnPoint3d = new Vector3(spawnPoint2d.x, 0, spawnPoint2d.y);
 			Quaternion spawnRotation = Quaternion.identity;
-			Instantiate (asteroid, spawnPoint3d, spawnRotation);
+			Instantiate (asteroids[Random.Range(0, 3)], spawnPoint3d, spawnRotation);
 		}
 	}
 	
