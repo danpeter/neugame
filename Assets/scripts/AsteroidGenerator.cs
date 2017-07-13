@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AstroidGenerator : MonoBehaviour {
+public class AsteroidGenerator : MonoBehaviour {
 
 	public GameObject asteroid;
 	public int asteroidCount;
@@ -20,10 +20,10 @@ public class AstroidGenerator : MonoBehaviour {
 		colliderRadius = myCollider.radius;
 
 		for (int i = 0; i < asteroidCount; i++) {
-			Vector3 spawnPoint = Random.insideUnitSphere * colliderRadius;
-			spawnPoint.y = 0; //Make into 2D coordinate
+			Vector2 spawnPoint2d = Random.insideUnitCircle * colliderRadius;
+			Vector3 spawnPoint3d = new Vector3(spawnPoint2d.x, 0, spawnPoint2d.y);
 			Quaternion spawnRotation = Quaternion.identity;
-			Instantiate (asteroid, spawnPoint, spawnRotation);
+			Instantiate (asteroid, spawnPoint3d, spawnRotation);
 		}
 	}
 	
@@ -33,6 +33,7 @@ public class AstroidGenerator : MonoBehaviour {
 	}
 
 	void LateUpdate () {
+		//The collider should follow the player ship
 		if (player != null) {
 			transform.position = player.transform.position + offset;
 		}
@@ -40,12 +41,12 @@ public class AstroidGenerator : MonoBehaviour {
 
 	void OnTriggerExit(Collider other) 
 	{
-		//When a asteroid leaves the collider we want to move it back in, but outside the players vision
+		//When a asteroid leaves the collider we want to move it back in outside the players vision, on the edge of the collider
 		if (other.tag == "Asteroid") {
 			Debug.Log ("Moving asteroid");
-			//Move the asteroid to the edge of the collider, centered on the player
-			Vector3 newPosition = Random.onUnitSphere * colliderRadius;
-			newPosition.y = 0; //Make into 2D coordinate
+			//Normalize makes into a "onUnitCircle, kindof
+			Vector2 newPosition2d = Random.insideUnitCircle.normalized;
+			Vector3 newPosition = new Vector3(newPosition2d.x, 0, newPosition2d.y) * colliderRadius;
 			other.transform.position = transform.position + newPosition;
 		}
 
