@@ -1,0 +1,71 @@
+[33mcommit eee08d72f064033af33e776888f690cc6abc5f73[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: danpeter <danpeter@kth.se>
+Date:   Thu Jul 13 21:31:08 2017 +0200
+
+    Adding tag Asteroid to new asteroid prefabs
+
+[33mcommit 41a9bb45e23e61618fc27a48254c0cea9553bf94[m
+Author: danpeter <danpeter@kth.se>
+Date:   Thu Jul 13 21:26:00 2017 +0200
+
+    Adding more lightning
+
+[33mcommit 8b723ced9841765e6a5237581769790239578429[m
+Author: danpeter <danpeter@kth.se>
+Date:   Thu Jul 13 21:02:28 2017 +0200
+
+    Two more asteroids
+
+[33mcommit fdd1e649279216621e26cece8ac7ac821f5a130e[m
+Author: danpeter <danpeter@kth.se>
+Date:   Thu Jul 13 20:43:20 2017 +0200
+
+    Fixed asteroid spawn distribution
+
+[33mcommit 6865ed21c7c8770d2781408bb67f6fc362253878[m
+Author: danpeter <danpeter@kth.se>
+Date:   Wed Jul 12 21:47:14 2017 +0200
+
+    Adding asteroids
+
+[33mcommit 3c8d8c16ace27216292bb0606e4a9fad29a40d5c[m
+Author: Adam Skoglund <skoglund.a@gmail.com>
+Date:   Sun Jul 9 18:24:24 2017 +0200
+
+    player and enemy health and weapon damage
+
+[33mcommit bb1d6a744afc905f092ea7c9e929a4ff4c9206a2[m
+Author: Adam Skoglund <skoglund.a@gmail.com>
+Date:   Fri Jul 7 23:59:40 2017 +0200
+
+    new graphics, homing missiles for player and enemy
+
+[33mcommit 68fecbef5f00d9e51165f4f60d3fceebac387bcf[m
+Author: Adam Skoglund <skoglund.a@gmail.com>
+Date:   Thu Jul 6 00:15:53 2017 +0200
+
+    moving enemies and new background starfield
+
+[33mcommit c5f6b207e993f45124fdb258c91627355e9b9d53[m
+Author: Adam Skoglund <skoglund.a@gmail.com>
+Date:   Sat Jul 1 23:55:00 2017 +0200
+
+    infinite scrolling parallax background
+
+[33mcommit fe416c277dc28a81dc79907a06ac68ac8ef76a0b[m
+Author: Adam Skoglund <skoglund.a@gmail.com>
+Date:   Sat Jul 1 15:23:20 2017 +0200
+
+    rotate engine particles with ship
+
+[33mcommit c4ff5b9e2fb55816f2420c09bfab4cc3aa43d025[m
+Author: danpeter <danpeter@kth.se>
+Date:   Fri Jun 30 22:01:13 2017 +0200
+
+    Accelerate and change direction with the mouse
+
+[33mcommit 20efb646b06930704e3bd4e0ae344d72516eb1af[m
+Author: danpeter <danpeter@kth.se>
+Date:   Thu Jun 29 21:13:33 2017 +0200
+
+    project setup
